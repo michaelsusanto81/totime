@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
@@ -21,6 +22,7 @@ class UserActivityFragment : Fragment() {
 
     private lateinit var binding: FragmentUserActivityBinding
     private lateinit var viewModel: UserActivityViewModel
+    private val INVALID_INPUT = "Please fill all fields."
 
     private val br: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -45,6 +47,7 @@ class UserActivityFragment : Fragment() {
         checkTimerState()
         binding.btnStart.setOnClickListener { startTimer() }
         binding.btnStop.setOnClickListener { stopTimer() }
+        binding.btnSave.setOnClickListener { saveTimer() }
     }
 
     private fun checkTimerState() {
@@ -52,10 +55,25 @@ class UserActivityFragment : Fragment() {
             TimerState.STARTED -> {
                 binding.btnStart.visibility = View.GONE
                 binding.btnStop.visibility = View.VISIBLE
+                binding.btnSave.visibility = View.GONE
+                binding.activityNameField.visibility = View.GONE
+                binding.placeField.visibility = View.GONE
+            }
+            TimerState.STOPPED -> {
+                binding.btnStart.visibility = View.GONE
+                binding.btnStop.visibility = View.GONE
+                binding.btnSave.visibility = View.VISIBLE
+                binding.activityNameEdit.setText("")
+                binding.activityNameField.visibility = View.VISIBLE
+                binding.placeEdit.setText("")
+                binding.placeField.visibility = View.VISIBLE
             }
             else -> {
                 binding.btnStart.visibility = View.VISIBLE
                 binding.btnStop.visibility = View.GONE
+                binding.btnSave.visibility = View.GONE
+                binding.activityNameField.visibility = View.GONE
+                binding.placeField.visibility = View.GONE
             }
         }
     }
@@ -71,6 +89,18 @@ class UserActivityFragment : Fragment() {
         viewModel.setTimerState(requireContext(), "Stopped")
         binding.timer.setText(R.string.start_timer)
         checkTimerState()
+    }
+
+    private fun saveTimer() {
+        val activityName = binding.activityNameEdit.text.toString()
+        val place = binding.placeEdit.text.toString()
+        if(!viewModel.validateInput(activityName, place)) {
+            val toast = Toast.makeText(requireContext(), INVALID_INPUT, Toast.LENGTH_LONG)
+            toast.show()
+        } else {
+            viewModel.setTimerState(requireContext(), "Saved")
+            checkTimerState()
+        }
     }
 
     override fun onResume() {

@@ -17,15 +17,20 @@ class UserActivityViewModel: ViewModel() {
         return if(state != null) {
             when (state) {
                 "Started" -> TimerState.STARTED
-                else -> TimerState.STOPPED
+                "Stopped" -> TimerState.STOPPED
+                else -> TimerState.SAVED
             }
         } else {
-            TimerState.STOPPED
+            TimerState.SAVED
         }
     }
 
     fun setTimerState(context: Context, state: String) {
         pref = SessionManager(context)
         pref.saveData(TIMER_STATE, state)
+    }
+
+    fun validateInput(activityName: String, place: String): Boolean {
+        return activityName.isNotEmpty() && place.isNotEmpty()
     }
 }

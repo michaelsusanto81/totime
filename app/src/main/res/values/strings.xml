@@ -11,4 +11,7 @@
     <string name="current_timer">00:00:00</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
+    <string name="save">Save</string>
+    <string name="activity_name">Activity Name</string>
+    <string name="place">Place</string>
 </resources>
