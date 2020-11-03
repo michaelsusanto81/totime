@@ -15,8 +15,8 @@ import kotlinx.coroutines.launch
 
 class UserActivityViewModel(private val context: Context): ViewModel() {
 
-    private var pref: SessionManager = SessionManager(context)
-    private var repository: UserActivityRepository = UserActivityRepository(context)
+    private val pref: SessionManager = SessionManager(context)
+    private val repository: UserActivityRepository = UserActivityRepository(context)
     private val TIMER_STATE = "TimerState"
     private var hours: Int = 0
     private var minutes: Int = 0
