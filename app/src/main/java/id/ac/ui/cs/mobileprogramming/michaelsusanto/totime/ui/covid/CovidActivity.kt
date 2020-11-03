@@ -14,7 +14,6 @@ class CovidActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCovidBinding
     private lateinit var navController: NavController
-    private val TOOLBAR_TITLE = "Covid-19"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +25,7 @@ class CovidActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = TOOLBAR_TITLE
+        supportActionBar?.title = getString(R.string.covid_19)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

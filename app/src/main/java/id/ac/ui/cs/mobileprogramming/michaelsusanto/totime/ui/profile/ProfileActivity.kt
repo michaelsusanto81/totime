@@ -12,7 +12,6 @@ import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.ActivityP
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
-    private val TOOLBAR_TITLE = "Profile"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +21,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = TOOLBAR_TITLE
+        supportActionBar?.title = getString(R.string.profile)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
