@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_covid"
+    app:startDestination="@id/covidHomeFragment">
+
+    <fragment
+        android:id="@+id/covidHomeFragment"
+        android:name="id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.covid.home.CovidHomeFragment"
+        android:label="fragment_covid_home"
+        tools:layout="@layout/fragment_covid_home" />
+    <fragment
+        android:id="@+id/covidSavedFragment"
+        android:name="id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.covid.saved.CovidSavedFragment"
+        android:label="fragment_covid_saved"
+        tools:layout="@layout/fragment_covid_saved" />
+</navigation>
