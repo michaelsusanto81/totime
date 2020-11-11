@@ -1,8 +1,16 @@
 package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model
 
+import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+@Entity(tableName = "Users")
 data class User(
-    val id: Int,
-    val name: String,
-    val email: String,
-    val profPic: String
-)
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int = 0,
+    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "email") val email: String,
+    @ColumnInfo(name = "prof_pic") var profPic: String = ""
+) : Parcelable
