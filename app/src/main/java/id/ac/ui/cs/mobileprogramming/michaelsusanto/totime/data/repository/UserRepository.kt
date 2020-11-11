@@ -16,8 +16,8 @@ class UserRepository(context: Context) {
         }
     }
 
-    suspend fun getUser(user: User): User {
-        return dao.getUser(user.id, user.name, user.email)
+    suspend fun getUsers(): List<User> {
+        return dao.getUsers()
     }
 
     suspend fun addUser(user: User) {

@@ -4,20 +4,31 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.User
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
+    private lateinit var viewModel: ProfileViewModel
+    private lateinit var viewModelFactory: ProfileViewModelFactory
+    private val INVALID_INPUT = "Please fill all fields."
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile)
+        viewModelFactory = ProfileViewModelFactory(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
+
         setupToolbar()
+        getData()
         binding.btnEdit.setOnClickListener { edit() }
         binding.btnSave.setOnClickListener { save() }
         binding.btnCancel.setOnClickListener { cancel() }
@@ -25,7 +36,21 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnGallery.setOnClickListener { gallery() }
     }
 
+    private fun getData() {
+        viewModel.getData()
+        viewModel.liveData.observe(this, Observer {
+            updateView(it)
+        })
+    }
+
+    private fun updateView(user: User) {
+        binding.nameLabel.text = user.name
+        binding.emailLabel.text = user.email
+    }
+
     private fun edit() {
+        val name = viewModel.liveData.value?.name
+        val email = viewModel.liveData.value?.email
         binding.nameLabel.visibility = View.GONE
         binding.emailLabel.visibility = View.GONE
         binding.btnEdit.visibility = View.GONE
@@ -35,10 +60,27 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnCancel.visibility = View.VISIBLE
         binding.btnCamera.visibility = View.VISIBLE
         binding.btnGallery.visibility = View.VISIBLE
+        binding.nameEdit.setText(name)
+        binding.emailEdit.setText(email)
     }
 
     private fun save() {
-        cancel()
+        val name = binding.nameEdit.text.toString()
+        val email = binding.emailEdit.text.toString()
+        val user = viewModel.liveData.value
+        if(!viewModel.validateInput(name, email)) {
+            val toast = Toast.makeText(this, INVALID_INPUT, Toast.LENGTH_LONG)
+            toast.show()
+        } else {
+            if (user != null) {
+                user.name = name
+                user.email = email
+                viewModel.updateData(user)
+            }
+            binding.nameLabel.text = name
+            binding.emailLabel.text = email
+            cancel()
+        }
     }
 
     private fun cancel() {

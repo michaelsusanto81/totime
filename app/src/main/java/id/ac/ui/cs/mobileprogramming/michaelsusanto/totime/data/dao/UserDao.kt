@@ -6,8 +6,8 @@ import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.User
 @Dao
 interface UserDao {
 
-    @Query("SELECT * FROM Users WHERE id =:id AND name =:name AND email =:email")
-    suspend fun getUser(id: Int, name: String, email: String): User
+    @Query("SELECT * FROM Users")
+    suspend fun getUsers(): List<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(user: User)
