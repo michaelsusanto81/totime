@@ -8,6 +8,7 @@ import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.util.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
 object ApiFactory {
     private lateinit var covidCaseApi: CovidCaseApi
@@ -17,9 +18,19 @@ object ApiFactory {
         .add(KotlinJsonAdapterFactory())
         .build()
 
+    private fun okHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .callTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .build()
+    }
+
     private fun getRetrofit(context: Context): Retrofit {
         if(!::retrofit.isInitialized) {
             retrofit = Retrofit.Builder()
+                .client(okHttpClient())
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .baseUrl(Constants.COVID_API_URL)

@@ -5,14 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.CovidCase
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.FragmentCovidHomeBinding
 
-class CovidHomeFragment : Fragment() {
+class CovidHomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var binding: FragmentCovidHomeBinding
     private lateinit var viewModel: CovidHomeViewModel
@@ -31,13 +33,20 @@ class CovidHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.swipeRefresh.setOnRefreshListener(this)
         getData()
     }
 
     private fun getData() {
+        binding.swipeRefresh.isRefreshing = true
         viewModel.updateData()
         viewModel.covidCase.observe(viewLifecycleOwner, Observer {
             updateView(it)
+            binding.swipeRefresh.isRefreshing = false
+        })
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            val toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+            toast.show()
         })
     }
 
@@ -46,5 +55,19 @@ class CovidHomeFragment : Fragment() {
         binding.recoveredValue.text = covidCase.recovered
         binding.deathValue.text = covidCase.death
         binding.hospitalizedValue.text = covidCase.hospitalized
+    }
+
+    override fun onRefresh() {
+        getData()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.swipeRefresh.setOnRefreshListener(null)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.swipeRefresh.setOnRefreshListener(null)
     }
 }
