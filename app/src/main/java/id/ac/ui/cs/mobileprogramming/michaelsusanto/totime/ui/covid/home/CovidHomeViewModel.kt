@@ -12,6 +12,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.io.IOException
 import retrofit2.HttpException
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CovidHomeViewModel(private val context: Context) : ViewModel() {
 
@@ -22,6 +24,22 @@ class CovidHomeViewModel(private val context: Context) : ViewModel() {
 
     private val job = Job()
     private val coroutineScope = CoroutineScope(job + Dispatchers.Main)
+
+    fun saveData(savedCovidCase: CovidCase) {
+        coroutineScope.launch {
+            val date = getDate()
+            savedCovidCase.date = date
+            repository.addCovidCase(savedCovidCase)
+        }
+    }
+
+    private fun getDate(): String {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        return "$year/$month/$day"
+    }
 
     fun updateData() {
         coroutineScope.launch {

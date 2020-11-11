@@ -22,9 +22,9 @@ class HistoryAdapter(private val userActivities: List<UserActivity>): RecyclerVi
         holder.view.place.text = userActivities[position].place
         holder.view.date.text = userActivities[position].dateStart
 
-        val hours = userActivities[position].hours
-        val minutes = userActivities[position].minutes
-        val seconds = userActivities[position].seconds
+        val hours = userActivities[position].hours.toString().padStart(2, '0')
+        val minutes = userActivities[position].minutes.toString().padStart(2, '0')
+        val seconds = userActivities[position].seconds.toString().padStart(2, '0')
         holder.view.time.text = "$hours:$minutes:$seconds"
     }
 

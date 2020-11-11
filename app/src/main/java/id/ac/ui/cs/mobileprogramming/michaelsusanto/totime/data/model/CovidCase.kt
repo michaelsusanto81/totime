@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "CovidCases")
 data class CovidCase(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int = 0,
-    @ColumnInfo(name = "date") val date: String = "Date",
+    @ColumnInfo(name = "date") var date: String = "Date",
     @ColumnInfo(name = "country") @Json(name = "name") val country: String = "Indonesia",
     @ColumnInfo(name = "death") @Json(name = "meninggal") val death: String,
     @ColumnInfo(name = "recovered") @Json(name = "sembuh") val recovered: String,

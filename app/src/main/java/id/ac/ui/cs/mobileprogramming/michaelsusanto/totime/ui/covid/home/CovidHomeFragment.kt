@@ -34,19 +34,33 @@ class CovidHomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.swipeRefresh.setOnRefreshListener(this)
+        binding.btnSave.setOnClickListener { saveData() }
         getData()
     }
 
+    private fun saveData() {
+        val covidCase = viewModel.covidCase.value
+        if (covidCase != null) {
+            viewModel.saveData(covidCase)
+            val toast = Toast.makeText(requireContext(), "Data Saved", Toast.LENGTH_LONG)
+            toast.show()
+        }
+    }
+
     private fun getData() {
+        binding.btnSave.visibility = View.GONE
         binding.swipeRefresh.isRefreshing = true
         viewModel.updateData()
         viewModel.covidCase.observe(viewLifecycleOwner, Observer {
             updateView(it)
             binding.swipeRefresh.isRefreshing = false
+            binding.btnSave.visibility = View.VISIBLE
         })
         viewModel.error.observe(viewLifecycleOwner, Observer {
             val toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
             toast.show()
+            binding.swipeRefresh.isRefreshing = false
+            binding.btnSave.visibility = View.VISIBLE
         })
     }
 

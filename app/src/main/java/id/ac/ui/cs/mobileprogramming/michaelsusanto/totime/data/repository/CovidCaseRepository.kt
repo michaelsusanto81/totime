@@ -20,6 +20,10 @@ class CovidCaseRepository(context: Context) {
         api = ApiFactory.getCovidCaseApi(context)
     }
 
+    suspend fun getSavedCovidCases(): List<CovidCase> {
+        return dao.getSavedCovidCases()
+    }
+
     suspend fun addCovidCase(covidCase: CovidCase) {
         dao.addCovidCase(covidCase)
     }
