@@ -15,7 +15,7 @@
     <string name="activity_name">Activity Name</string>
     <string name="place">Place</string>
     <string name="positive">Positive:</string>
-    <string name="zero">0</string>
+    <string name="zero" translatable="false">0</string>
     <string name="death">Death:</string>
     <string name="hospitalized">Hospitalized:</string>
     <string name="recovered">Recovered:</string>

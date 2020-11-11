@@ -11,4 +11,8 @@
     <string name="save">Simpan</string>
     <string name="activity_name">Nama Aktivitas</string>
     <string name="place">Tempat</string>
+    <string name="positive">Positif:</string>
+    <string name="death">Meninggal:</string>
+    <string name="hospitalized">Dirawat:</string>
+    <string name="recovered">Sembuh:</string>
 </resources>
