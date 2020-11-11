@@ -17,4 +17,7 @@
     <string name="recovered">Sembuh:</string>
     <string name="edit">Ubah</string>
     <string name="cancel">Batal</string>
+    <string name="name">Nama</string>
+    <string name="description">Membantu Anda merekam dan\mengatur aktivitas</string>
+    <string name="lets_start">Ayo Mulai</string>
 </resources>
