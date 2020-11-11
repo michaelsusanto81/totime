@@ -16,8 +16,9 @@
                 android:id="@+id/imageView"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
+                android:layout_marginStart="32dp"
                 android:src="@drawable/ic_indonesia"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,23 +26,23 @@
                 android:id="@+id/positive"
                 android:layout_width="211dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:text="Positive:"
-                android:textSize="18sp"
                 android:textAlignment="center"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintBottom_toTopOf="@+id/hospitalized"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView" />
 
             <TextView
                 android:id="@+id/positive_value"
                 android:layout_width="204dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:text="xxx"
                 android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/positive" />
+                app:layout_constraintBottom_toTopOf="@+id/hospitalized"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/death" />
 
             <TextView
                 android:id="@+id/death"
@@ -49,8 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:text="Death:"
-                android:textSize="18sp"
                 android:textAlignment="center"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@+id/positive"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -69,24 +70,22 @@
                 android:id="@+id/hospitalized"
                 android:layout_width="204dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
                 android:text="Hospitalized:"
-                android:textSize="18sp"
                 android:textAlignment="center"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/positive_value" />
+                app:layout_constraintBottom_toTopOf="@+id/hospitalized_value"
+                app:layout_constraintStart_toEndOf="@+id/imageView" />
 
             <TextView
                 android:id="@+id/hospitalized_value"
                 android:layout_width="204dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_height="90dp"
+                android:layout_marginBottom="64dp"
                 android:text="xxx"
                 android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hospitalized" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/imageView" />
 
             <TextView
                 android:id="@+id/recovered"
@@ -94,8 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:text="Recovered:"
-                android:textSize="18sp"
                 android:textAlignment="center"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@+id/hospitalized"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -114,12 +113,13 @@
                 android:id="@+id/btn_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="@string/save"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hospitalized_value" />
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/recovered_value" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
