@@ -3,6 +3,7 @@ package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.profile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -17,6 +18,47 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile)
         setupToolbar()
+        binding.btnEdit.setOnClickListener { edit() }
+        binding.btnSave.setOnClickListener { save() }
+        binding.btnCancel.setOnClickListener { cancel() }
+        binding.btnCamera.setOnClickListener { camera() }
+        binding.btnGallery.setOnClickListener { gallery() }
+    }
+
+    private fun edit() {
+        binding.nameLabel.visibility = View.GONE
+        binding.emailLabel.visibility = View.GONE
+        binding.btnEdit.visibility = View.GONE
+        binding.nameField.visibility = View.VISIBLE
+        binding.emailField.visibility = View.VISIBLE
+        binding.btnSave.visibility = View.VISIBLE
+        binding.btnCancel.visibility = View.VISIBLE
+        binding.btnCamera.visibility = View.VISIBLE
+        binding.btnGallery.visibility = View.VISIBLE
+    }
+
+    private fun save() {
+        cancel()
+    }
+
+    private fun cancel() {
+        binding.nameLabel.visibility = View.VISIBLE
+        binding.emailLabel.visibility = View.VISIBLE
+        binding.btnEdit.visibility = View.VISIBLE
+        binding.nameField.visibility = View.GONE
+        binding.emailField.visibility = View.GONE
+        binding.btnSave.visibility = View.GONE
+        binding.btnCancel.visibility = View.GONE
+        binding.btnCamera.visibility = View.GONE
+        binding.btnGallery.visibility = View.GONE
+    }
+
+    private fun camera() {
+
+    }
+
+    private fun gallery() {
+
     }
 
     private fun setupToolbar() {

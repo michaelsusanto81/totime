@@ -15,4 +15,6 @@
     <string name="death">Meninggal:</string>
     <string name="hospitalized">Dirawat:</string>
     <string name="recovered">Sembuh:</string>
+    <string name="edit">Ubah</string>
+    <string name="cancel">Batal</string>
 </resources>
