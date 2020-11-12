@@ -26,10 +26,24 @@ class UserActivityFragment : Fragment() {
     private lateinit var viewModel: UserActivityViewModel
     private lateinit var viewModelFactory: UserActivityViewModelFactory
     private val INVALID_INPUT = "Please fill all fields."
+    private var timerText: String = "00:00:00"
 
     private val br: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             updateView(intent)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("timerText", timerText)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if(savedInstanceState != null) {
+            timerText = savedInstanceState.getString("timerText")!!
+            binding.timer.text = timerText
         }
     }
 
@@ -78,6 +92,7 @@ class UserActivityFragment : Fragment() {
                 binding.btnSave.visibility = View.GONE
                 binding.activityNameField.visibility = View.GONE
                 binding.placeField.visibility = View.GONE
+                timerText = "00:00:00"
             }
         }
     }
@@ -140,7 +155,8 @@ class UserActivityFragment : Fragment() {
             val hours: String = intent.getStringExtra("hours")!!
             val minutes: String = intent.getStringExtra("minutes")!!
             val seconds: String = intent.getStringExtra("seconds")!!
-            binding.timer.text = "$hours:$minutes:$seconds"
+            timerText = "$hours:$minutes:$seconds"
+            binding.timer.text = timerText
             viewModel.setTimer(hours.toInt(), minutes.toInt(), seconds.toInt())
         }
     }

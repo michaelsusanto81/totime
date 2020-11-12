@@ -31,7 +31,7 @@
                 android:id="@+id/prof_pic"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginStart="128dp"
+                android:layout_marginStart="64dp"
                 android:layout_marginTop="128dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,6 +46,15 @@
                 app:layout_constraintEnd_toStartOf="@+id/prof_pic"
                 app:layout_constraintTop_toBottomOf="@+id/prof_pic"
                 app:srcCompat="@drawable/ic_camera" />
+
+            <ImageView
+                android:id="@+id/btn_removePhoto"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/prof_pic"
+                app:layout_constraintTop_toTopOf="@+id/prof_pic"
+                app:srcCompat="@drawable/ic_remove" />
 
             <ImageView
                 android:id="@+id/btn_gallery"

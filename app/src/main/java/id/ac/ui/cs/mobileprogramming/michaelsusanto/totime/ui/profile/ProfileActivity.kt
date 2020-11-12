@@ -1,9 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.profile
 
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -14,12 +12,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.FileProvider
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.User
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.ActivityProfileBinding
@@ -33,12 +28,39 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
     private lateinit var viewModel: ProfileViewModel
     private lateinit var viewModelFactory: ProfileViewModelFactory
-    private lateinit var currentPhotoPath: String
     private val INVALID_INPUT = "Please fill all fields."
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_TAKE_PHOTO = 1
     private val REQUEST_SELECT_IMAGE_IN_ALBUM = 0
+    private var currentPhotoPath: String? = null
     private var currentUri: Uri? = null
+    private var isEdit: Boolean = false
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val name = binding.nameEdit.text.toString()
+        val email = binding.emailEdit.text.toString()
+        outState.putBoolean("edit", isEdit)
+        outState.putString("name", name)
+        outState.putString("email", email)
+        outState.putString("currentUri", currentUri?.toString())
+        outState.putString("currentPhotoPath", currentPhotoPath)
+    }
+
+    private fun restoreEditState(name: String?, email: String?, uri: Uri?, photoPath: String?) {
+        if(name != null && email != null) {
+            show()
+            binding.nameEdit.setText(name)
+            binding.emailEdit.setText(email)
+            currentUri = uri
+            currentPhotoPath = photoPath
+            if(uri != null) {
+                setGalleryPic(uri)
+            } else {
+                binding.profPic.setImageResource(R.drawable.ic_person)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +69,30 @@ class ProfileActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
 
         setupToolbar()
+
+        if(savedInstanceState != null) {
+            val isEdit = savedInstanceState.getBoolean("edit")
+            if(isEdit) {
+                val name = savedInstanceState.getString("name")
+                val email = savedInstanceState.getString("email")
+                val uriStr = savedInstanceState.getString("currentUri")
+                val uri = if(uriStr != null) {
+                    Uri.parse(uriStr)
+                } else {
+                    null
+                }
+                val photoPath = savedInstanceState.getString("currentPhotoPath")
+                restoreEditState(name, email, uri, photoPath)
+            }
+        }
+
         getData()
         binding.btnEdit.setOnClickListener { edit() }
         binding.btnSave.setOnClickListener { save() }
         binding.btnCancel.setOnClickListener { cancel() }
         binding.btnCamera.setOnClickListener { camera() }
         binding.btnGallery.setOnClickListener { gallery() }
+        binding.btnRemovePhoto.setOnClickListener { remove() }
     }
 
     private fun getData() {
@@ -82,6 +122,8 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnCancel.visibility = View.VISIBLE
         binding.btnCamera.visibility = View.VISIBLE
         binding.btnGallery.visibility = View.VISIBLE
+        binding.btnRemovePhoto.visibility = View.VISIBLE
+        isEdit = true
     }
 
     private fun hide() {
@@ -94,6 +136,8 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnCancel.visibility = View.GONE
         binding.btnCamera.visibility = View.GONE
         binding.btnGallery.visibility = View.GONE
+        binding.btnRemovePhoto.visibility = View.GONE
+        isEdit = false
     }
 
     private fun edit() {
@@ -117,6 +161,8 @@ class ProfileActivity : AppCompatActivity() {
                 user.email = email
                 if (currentUri != null) {
                     user.profPic = currentUri.toString()
+                } else {
+                    user.profPic = ""
                 }
                 viewModel.updateData(user)
             }
@@ -146,6 +192,12 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun gallery() {
         selectImageInAlbumIntent()
+    }
+
+    private fun remove() {
+        currentPhotoPath = null
+        currentUri = null
+        binding.profPic.setImageResource(R.drawable.ic_person)
     }
 
     private fun dispatchTakePictureIntent() {

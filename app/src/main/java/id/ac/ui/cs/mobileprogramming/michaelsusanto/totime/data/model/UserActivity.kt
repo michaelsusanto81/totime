@@ -14,6 +14,6 @@ data class UserActivity(
     @ColumnInfo(name = "hours") val hours: Int,
     @ColumnInfo(name = "minutes") val minutes: Int,
     @ColumnInfo(name = "seconds") val seconds: Int,
-    @ColumnInfo(name = "dateStart") val dateStart: String,
+    @ColumnInfo(name = "dateStart") var dateStart: String,
     @ColumnInfo(name = "place") val place: String
 ) : Parcelable

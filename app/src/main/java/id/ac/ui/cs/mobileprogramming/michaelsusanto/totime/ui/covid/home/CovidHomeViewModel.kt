@@ -27,8 +27,7 @@ class CovidHomeViewModel(private val context: Context) : ViewModel() {
 
     fun saveData(savedCovidCase: CovidCase) {
         coroutineScope.launch {
-            val date = getDate()
-            savedCovidCase.date = date
+            savedCovidCase.date = getDate()
             repository.addCovidCase(savedCovidCase)
         }
     }

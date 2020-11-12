@@ -1,9 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.home.useractivity
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.database.UserActivityDatabase
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.UserActivity
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.repository.UserActivityRepository
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.service.SessionManager
@@ -12,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 
 class UserActivityViewModel(private val context: Context): ViewModel() {
 
@@ -59,7 +58,23 @@ class UserActivityViewModel(private val context: Context): ViewModel() {
 
     fun saveData(userActivity: UserActivity) {
         coroutineScope.launch {
+            userActivity.dateStart = getDateTime()
             repository.addUserActivity(userActivity)
         }
+    }
+
+    private fun getDateTime(): String {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+        val amPm = if (calendar.get(Calendar.AM_PM) == 0) {
+            "AM"
+        } else {
+            "PM"
+        }
+        return "$year/$month/$day $hour:$minute $amPm"
     }
 }

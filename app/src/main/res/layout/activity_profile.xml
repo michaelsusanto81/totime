@@ -48,6 +48,15 @@
                 app:srcCompat="@drawable/ic_camera" />
 
             <ImageView
+                android:id="@+id/btn_removePhoto"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/prof_pic"
+                app:layout_constraintTop_toTopOf="@+id/prof_pic"
+                app:srcCompat="@drawable/ic_remove" />
+
+            <ImageView
                 android:id="@+id/btn_gallery"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
