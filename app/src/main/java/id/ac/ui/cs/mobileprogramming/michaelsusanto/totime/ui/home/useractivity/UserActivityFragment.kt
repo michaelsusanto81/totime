@@ -25,7 +25,6 @@ class UserActivityFragment : Fragment() {
     private lateinit var binding: FragmentUserActivityBinding
     private lateinit var viewModel: UserActivityViewModel
     private lateinit var viewModelFactory: UserActivityViewModelFactory
-    private val INVALID_INPUT = "Please fill all fields."
     private var timerText: String = "00:00:00"
 
     private val br: BroadcastReceiver = object : BroadcastReceiver() {
@@ -124,8 +123,9 @@ class UserActivityFragment : Fragment() {
             place = place
         )
 
-        if(!viewModel.validateInput(activityName, place)) {
-            val toast = Toast.makeText(requireContext(), INVALID_INPUT, Toast.LENGTH_LONG)
+        val response = viewModel.validateInput(activityName, place)
+        if(response.isError) {
+            val toast = Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG)
             toast.show()
         } else {
             binding.timer.setText(R.string.start_timer)

@@ -28,7 +28,6 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
     private lateinit var viewModel: ProfileViewModel
     private lateinit var viewModelFactory: ProfileViewModelFactory
-    private val INVALID_INPUT = "Please fill all fields."
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_TAKE_PHOTO = 1
     private val REQUEST_SELECT_IMAGE_IN_ALBUM = 0
@@ -152,8 +151,9 @@ class ProfileActivity : AppCompatActivity() {
         val name = binding.nameEdit.text.toString()
         val email = binding.emailEdit.text.toString()
         val user = viewModel.liveData.value
-        if (!viewModel.validateInput(name, email)) {
-            val toast = Toast.makeText(this, INVALID_INPUT, Toast.LENGTH_LONG)
+        val response = viewModel.validateInput(name, email)
+        if (response.isError) {
+            val toast = Toast.makeText(this, response.message, Toast.LENGTH_LONG)
             toast.show()
         } else {
             if (user != null) {

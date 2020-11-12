@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.UserActivity
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.repository.UserActivityRepository
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.service.SessionManager
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.util.Constants
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.util.TimerState
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.util.ValidationResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -42,8 +44,15 @@ class UserActivityViewModel(private val context: Context): ViewModel() {
         pref.saveData(TIMER_STATE, state)
     }
 
-    fun validateInput(activityName: String, place: String): Boolean {
-        return activityName.isNotEmpty() && place.isNotEmpty()
+    fun validateInput(activityName: String, place: String): ValidationResponse {
+        if(activityName.isEmpty() || place.isEmpty()) {
+            return ValidationResponse(true, "Field can't be empty.")
+        } else if(activityName.length > 30) {
+            return ValidationResponse(true, "Activity Name should at most 30 characters.")
+        } else if(place.length > 70) {
+            return ValidationResponse(true, "Place should at most 70 characters.")
+        }
+        return ValidationResponse(false, "Successfully saved!")
     }
 
     fun setTimer(hours: Int, minutes: Int, seconds: Int) {
@@ -66,10 +75,10 @@ class UserActivityViewModel(private val context: Context): ViewModel() {
     private fun getDateTime(): String {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
+        val month = calendar.get(Calendar.MONTH).toString().padStart(2, '0')
+        val day = calendar.get(Calendar.DAY_OF_MONTH).toString().padStart(2, '0')
+        val hour = calendar.get(Calendar.HOUR_OF_DAY).toString().padStart(2, '0')
+        val minute = calendar.get(Calendar.MINUTE).toString().padStart(2, '0')
         val amPm = if (calendar.get(Calendar.AM_PM) == 0) {
             "AM"
         } else {

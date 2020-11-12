@@ -16,7 +16,6 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
     private lateinit var viewModel: SplashViewModel
     private lateinit var viewModelFactory: SplashViewModelFactory
-    private val INVALID_INPUT = "Please fill all fields."
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +37,9 @@ class SplashActivity : AppCompatActivity() {
     private fun start() {
         val name = binding.nameEdit.text.toString()
         val email = binding.emailEdit.text.toString()
-        if(!viewModel.validateInput(name, email)) {
-            val toast = Toast.makeText(this, INVALID_INPUT, Toast.LENGTH_LONG)
+        val response = viewModel.validateInput(name, email)
+        if(response.isError) {
+            val toast = Toast.makeText(this, response.message, Toast.LENGTH_LONG)
             toast.show()
         } else {
             val user = User(name = name, email = email)

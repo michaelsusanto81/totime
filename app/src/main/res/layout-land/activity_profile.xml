@@ -31,7 +31,7 @@
                 android:id="@+id/prof_pic"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginStart="64dp"
+                android:layout_marginStart="48dp"
                 android:layout_marginTop="128dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -67,22 +67,28 @@
 
             <TextView
                 android:id="@+id/name_label"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:text="@string/app_name"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/prof_pic"
                 app:layout_constraintTop_toTopOf="@+id/prof_pic" />
 
             <TextView
                 android:id="@+id/email_label"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
                 android:text="@string/app_name"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/prof_pic"
                 app:layout_constraintTop_toBottomOf="@+id/name_label" />
 
@@ -90,7 +96,7 @@
                 android:id="@+id/btn_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="24dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/edit"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,12 +106,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_field"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="300dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="64dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:hint="@string/name"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/prof_pic"
                 app:layout_constraintTop_toTopOf="@+id/prof_pic">
 
@@ -120,13 +128,15 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/email_field"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="300dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="64dp"
+                android:layout_marginEnd="24dp"
                 android:hint="@string/email"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/prof_pic"
                 app:layout_constraintTop_toBottomOf="@+id/name_field">
 
