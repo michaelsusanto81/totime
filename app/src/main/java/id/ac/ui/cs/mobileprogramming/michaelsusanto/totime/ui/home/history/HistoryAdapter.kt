@@ -9,7 +9,10 @@ import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.UserActivity
 import kotlinx.android.synthetic.main.card_history.view.*
 
-class HistoryAdapter(private val userActivities: List<UserActivity>): RecyclerView.Adapter<HistoryAdapter.Holder>() {
+class HistoryAdapter(
+    private val context: HistoryFragment,
+    private val userActivities: ArrayList<UserActivity>
+): RecyclerView.Adapter<HistoryAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryAdapter.Holder {
         return Holder(
             LayoutInflater.from(parent.context).inflate(R.layout.card_history, parent, false)
@@ -30,5 +33,21 @@ class HistoryAdapter(private val userActivities: List<UserActivity>): RecyclerVi
 
     override fun getItemCount(): Int = userActivities.size
 
-    inner class Holder(val view: View) : RecyclerView.ViewHolder(view)
+    inner class Holder(val view: View) : RecyclerView.ViewHolder(view) {
+        private lateinit var communicator: HistoryCommunicator
+        init {
+            view.btn_remove.setOnClickListener {
+                val position = adapterPosition
+                val clickedItem = userActivities[position]
+                communicator = context
+                communicator.clickedItem(clickedItem)
+                notify(position)
+            }
+        }
+
+        private fun notify(position: Int) {
+            userActivities.removeAt(position)
+            notifyDataSetChanged()
+        }
+    }
 }

@@ -25,4 +25,10 @@ class HistoryViewModel(private val context: Context): ViewModel() {
             liveData.value = userActivities
         }
     }
+
+    fun removeData(userActivity: UserActivity) {
+        coroutineScope.launch {
+            repository.removeUserActivity(userActivity)
+        }
+    }
 }

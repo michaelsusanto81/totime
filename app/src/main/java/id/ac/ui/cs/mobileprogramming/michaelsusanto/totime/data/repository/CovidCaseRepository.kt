@@ -31,4 +31,8 @@ class CovidCaseRepository(context: Context) {
     suspend fun getCovidCase(): List<CovidCase> {
         return api.getCovidCase()
     }
+
+    suspend fun removeSavedCovidCase(covidCase: CovidCase) {
+        dao.removeSavedCovidCase(covidCase)
+    }
 }

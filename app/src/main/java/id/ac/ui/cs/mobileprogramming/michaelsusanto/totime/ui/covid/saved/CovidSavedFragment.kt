@@ -11,9 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.CovidCase
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.FragmentCovidSavedBinding
 
-class CovidSavedFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class CovidSavedFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, CovidSavedCommunicator {
 
     private lateinit var binding: FragmentCovidSavedBinding
     private lateinit var viewModel: CovidSavedViewModel
@@ -35,7 +36,7 @@ class CovidSavedFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         fetchData()
         binding.swipeRefresh.setOnRefreshListener(this)
         binding.recView.layoutManager = LinearLayoutManager(context)
-        binding.recView.adapter = CovidSavedAdapter(ArrayList())
+        binding.recView.adapter = CovidSavedAdapter(this, ArrayList())
     }
 
     private fun fetchData() {
@@ -43,7 +44,7 @@ class CovidSavedFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         viewModel.fetchData()
         viewModel.liveData.observe(viewLifecycleOwner, Observer {
             val savedCovidCases = viewModel.liveData.value
-            binding.recView.adapter = CovidSavedAdapter(savedCovidCases as ArrayList)
+            binding.recView.adapter = CovidSavedAdapter(this, savedCovidCases as ArrayList)
         })
         binding.swipeRefresh.isRefreshing = false
     }
@@ -60,5 +61,9 @@ class CovidSavedFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onDestroy() {
         super.onDestroy()
         binding.swipeRefresh.setOnRefreshListener(null)
+    }
+
+    override fun clickedItem(covidSaved: CovidCase) {
+        viewModel.removeData(covidSaved)
     }
 }

@@ -24,6 +24,14 @@
             android:layout_height="match_parent"
             android:padding="16dp">
 
+            <ImageView
+                android:id="@+id/btn_remove"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_remove" />
+
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
@@ -62,19 +70,21 @@
                 android:id="@+id/death"
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
                 android:text="@string/death"
                 android:textAlignment="center"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_remove"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/death_value"
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
                 android:text="@string/zero"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_remove"
                 app:layout_constraintTop_toBottomOf="@+id/death" />
 
             <TextView
@@ -103,19 +113,21 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
                 android:text="@string/recovered"
                 android:textAlignment="center"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_remove"
                 app:layout_constraintTop_toBottomOf="@+id/death_value" />
 
             <TextView
                 android:id="@+id/recovered_value"
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
                 android:text="@string/zero"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_remove"
                 app:layout_constraintTop_toBottomOf="@+id/recovered" />
 
 

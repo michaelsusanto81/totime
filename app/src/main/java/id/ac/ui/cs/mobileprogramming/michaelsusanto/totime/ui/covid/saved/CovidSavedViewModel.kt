@@ -24,4 +24,10 @@ class CovidSavedViewModel(private val context: Context): ViewModel() {
             liveData.value = savedCovidCases
         }
     }
+
+    fun removeData(savedCovidCase: CovidCase) {
+        coroutineScope.launch {
+            repository.removeSavedCovidCase(savedCovidCase)
+        }
+    }
 }

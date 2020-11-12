@@ -1,9 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.UserActivity
 
 @Dao
@@ -14,4 +11,7 @@ interface UserActivityDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUserActivity(userActivity: UserActivity)
+
+    @Delete
+    suspend fun removeUserActivity(userActivity: UserActivity)
 }

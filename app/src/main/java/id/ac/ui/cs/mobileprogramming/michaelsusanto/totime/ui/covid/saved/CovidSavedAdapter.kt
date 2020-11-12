@@ -8,7 +8,10 @@ import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.CovidCase
 import kotlinx.android.synthetic.main.card_covidcase.view.*
 
-class CovidSavedAdapter(private val savedCovidCases: List<CovidCase>): RecyclerView.Adapter<CovidSavedAdapter.Holder>() {
+class CovidSavedAdapter(
+    private val context: CovidSavedFragment,
+    private val savedCovidCases: ArrayList<CovidCase>
+): RecyclerView.Adapter<CovidSavedAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CovidSavedAdapter.Holder {
         return Holder(
             LayoutInflater.from(parent.context).inflate(R.layout.card_covidcase, parent, false)
@@ -25,5 +28,21 @@ class CovidSavedAdapter(private val savedCovidCases: List<CovidCase>): RecyclerV
 
     override fun getItemCount(): Int = savedCovidCases.size
 
-    inner class Holder(val view: View) : RecyclerView.ViewHolder(view)
+    inner class Holder(val view: View) : RecyclerView.ViewHolder(view) {
+        private lateinit var communicator: CovidSavedCommunicator
+        init {
+            view.btn_remove.setOnClickListener {
+                val position = adapterPosition
+                val clickedItem = savedCovidCases[position]
+                communicator = context
+                communicator.clickedItem(clickedItem)
+                notify(position)
+            }
+        }
+
+        private fun notify(position: Int) {
+            savedCovidCases.removeAt(position)
+            notifyDataSetChanged()
+        }
+    }
 }

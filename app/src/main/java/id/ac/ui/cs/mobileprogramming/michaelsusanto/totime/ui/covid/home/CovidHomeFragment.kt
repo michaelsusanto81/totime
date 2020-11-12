@@ -79,9 +79,4 @@ class CovidHomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         super.onDestroyView()
         binding.swipeRefresh.setOnRefreshListener(null)
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.swipeRefresh.setOnRefreshListener(null)
-    }
 }

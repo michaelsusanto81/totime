@@ -11,9 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.UserActivity
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.FragmentHistoryBinding
 
-class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, HistoryCommunicator {
 
     private lateinit var binding: FragmentHistoryBinding
     private lateinit var viewModel: HistoryViewModel
@@ -35,7 +36,7 @@ class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         fetchData()
         binding.swipeRefresh.setOnRefreshListener(this)
         binding.recView.layoutManager = LinearLayoutManager(context)
-        binding.recView.adapter = HistoryAdapter(ArrayList())
+        binding.recView.adapter = HistoryAdapter(this, ArrayList())
     }
 
     private fun fetchData() {
@@ -43,7 +44,7 @@ class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         viewModel.fetchData()
         viewModel.liveData.observe(viewLifecycleOwner, Observer {
             val userActivities = viewModel.liveData.value
-            binding.recView.adapter = HistoryAdapter(userActivities as ArrayList)
+            binding.recView.adapter = HistoryAdapter(this, userActivities as ArrayList)
         })
         binding.swipeRefresh.isRefreshing = false
     }
@@ -60,5 +61,9 @@ class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onDestroy() {
         super.onDestroy()
         binding.swipeRefresh.setOnRefreshListener(null)
+    }
+
+    override fun clickedItem(userActivity: UserActivity) {
+        viewModel.removeData(userActivity)
     }
 }

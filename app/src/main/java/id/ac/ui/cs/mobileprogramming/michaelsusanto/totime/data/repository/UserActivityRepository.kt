@@ -24,4 +24,8 @@ class UserActivityRepository(context: Context) {
     suspend fun addUserActivity(userActivity: UserActivity) {
         dao.addUserActivity(userActivity)
     }
+
+    suspend fun removeUserActivity(userActivity: UserActivity) {
+        dao.removeUserActivity(userActivity)
+    }
 }
