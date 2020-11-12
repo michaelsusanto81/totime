@@ -37,6 +37,7 @@ class ProfileActivity : AppCompatActivity() {
     private val INVALID_INPUT = "Please fill all fields."
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_TAKE_PHOTO = 1
+    private val REQUEST_SELECT_IMAGE_IN_ALBUM = 0
     private var currentUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -144,7 +145,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun gallery() {
-
+        selectImageInAlbumIntent()
     }
 
     private fun dispatchTakePictureIntent() {
@@ -225,11 +226,31 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun selectImageInAlbumIntent() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "image/*"
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
+        }
+    }
+
+    private fun setGalleryPic(uri: Uri) {
+        binding.profPic.setImageURI(null)
+        binding.profPic.setImageURI(uri)
+        currentUri = uri
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             galleryAddPic()
             setPic()
+        }
+        if (requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM && resultCode == RESULT_OK) {
+            if (data != null) {
+                val uri = data.data!!
+                setGalleryPic(uri)
+            }
         }
     }
 
