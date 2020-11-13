@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.covid.home.CovidHomeFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="400dp"
+                    android:layout_height="400dp"
+                    android:layout_marginTop="24dp"
+                    android:src="@drawable/ic_indonesia"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/positive"
+                    android:layout_width="211dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="128dp"
+                    android:text="@string/positive"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_save"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                <TextView
+                    android:id="@+id/positive_value"
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="128dp"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_save"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/positive" />
+
+                <TextView
+                    android:id="@+id/death"
+                    android:layout_width="198dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="128dp"
+                    android:text="@string/death"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/positive"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_save" />
+
+                <TextView
+                    android:id="@+id/death_value"
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="128dp"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/positive_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_save" />
+
+                <TextView
+                    android:id="@+id/hospitalized"
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="128dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/hospitalized"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_save"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/positive_value" />
+
+                <TextView
+                    android:id="@+id/hospitalized_value"
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="128dp"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_save"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hospitalized" />
+
+                <TextView
+                    android:id="@+id/recovered"
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="128dp"
+                    android:text="@string/recovered"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/hospitalized"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_save" />
+
+                <TextView
+                    android:id="@+id/recovered_value"
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="128dp"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/hospitalized_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_save" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="64dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="@string/save"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hospitalized_value" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </FrameLayout>
+</layout>
