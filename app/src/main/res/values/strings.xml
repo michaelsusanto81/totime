@@ -25,4 +25,14 @@
     <string name="email" translatable="false">Email</string>
     <string name="description">Helps you record and \nmanage activities</string>
     <string name="lets_start">Let\'s Start</string>
+    <string name="data_saved">Data Saved</string>
+    <string name="check_internet">Check your Internet Connection</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="field_not_empty">Field can\'t be empty.</string>
+    <string name="activity_less_30">Activity Name should at most 30 characters.</string>
+    <string name="place_less_70">Place should at most 70 characters.</string>
+    <string name="successfully_saved">Successfully saved!</string>
+    <string name="name_less_50">Name should at most 50 characters.</string>
+    <string name="email_less_70">Email should at most 70 characters.</string>
+    <string name="email_not_valid">Email address is not valid.</string>
 </resources>

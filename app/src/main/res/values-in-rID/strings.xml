@@ -20,4 +20,14 @@
     <string name="name">Nama</string>
     <string name="description">Membantu Anda merekam dan\mengatur aktivitas</string>
     <string name="lets_start">Ayo Mulai</string>
+    <string name="data_saved">Data tersimpan</string>
+    <string name="check_internet">Periksa Koneksi Anda</string>
+    <string name="unknown_error">Error tidak diketahui</string>
+    <string name="field_not_empty">Field tidak boleh kosong.</string>
+    <string name="activity_less_30">Nama aktivitas maksimal 30 karakter.</string>
+    <string name="place_less_70">Tempat maksimal 70 karakter.</string>
+    <string name="successfully_saved">Berhasil tersimpan!</string>
+    <string name="name_less_50">Nama maksimal 50 karakter.</string>
+    <string name="email_less_70">Email maksimal 70 karakter.</string>
+    <string name="email_not_valid">Alamat email tidak valid.</string>
 </resources>

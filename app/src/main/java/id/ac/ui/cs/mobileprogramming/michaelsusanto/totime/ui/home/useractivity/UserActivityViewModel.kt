@@ -2,6 +2,7 @@ package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.home.useractivity
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.UserActivity
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.repository.UserActivityRepository
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.service.SessionManager
@@ -46,13 +47,13 @@ class UserActivityViewModel(private val context: Context): ViewModel() {
 
     fun validateInput(activityName: String, place: String): ValidationResponse {
         if(activityName.isEmpty() || place.isEmpty()) {
-            return ValidationResponse(true, "Field can't be empty.")
+            return ValidationResponse(true, context.getString(R.string.field_not_empty))
         } else if(activityName.length > 30) {
-            return ValidationResponse(true, "Activity Name should at most 30 characters.")
+            return ValidationResponse(true, context.getString(R.string.activity_less_30))
         } else if(place.length > 70) {
-            return ValidationResponse(true, "Place should at most 70 characters.")
+            return ValidationResponse(true, context.getString(R.string.place_less_70))
         }
-        return ValidationResponse(false, "Successfully saved!")
+        return ValidationResponse(false, context.getString(R.string.successfully_saved))
     }
 
     fun setTimer(hours: Int, minutes: Int, seconds: Int) {

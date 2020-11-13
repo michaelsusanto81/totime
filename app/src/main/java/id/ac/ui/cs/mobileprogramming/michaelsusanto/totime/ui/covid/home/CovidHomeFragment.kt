@@ -42,7 +42,7 @@ class CovidHomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         val covidCase = viewModel.covidCase.value
         if (covidCase != null) {
             viewModel.saveData(covidCase)
-            val toast = Toast.makeText(requireContext(), "Data Saved", Toast.LENGTH_LONG)
+            val toast = Toast.makeText(requireContext(), getString(R.string.data_saved), Toast.LENGTH_LONG)
             toast.show()
         }
     }

@@ -3,6 +3,7 @@ package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.covid.home
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.CovidCase
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.repository.CovidCaseRepository
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.service.SessionManager
@@ -47,13 +48,13 @@ class CovidHomeViewModel(private val context: Context) : ViewModel() {
                 covidCase.value = data[0]
                 setCache(data[0])
             } catch (e: IOException) {
-                error.value = "Check your Internet Connection"
+                error.value = context.getString(R.string.check_internet)
                 getFromCache()
             } catch (e: HttpException) {
                 error.value = e.message()
                 getFromCache()
             } catch (e: Exception) {
-                error.value = "Unknown Error"
+                error.value = context.getString(R.string.unknown_error)
                 getFromCache()
             }
         }
