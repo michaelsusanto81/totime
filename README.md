@@ -21,6 +21,6 @@ An application to help you record and manage your activities, as well as get up-
 	* You can set the language from your own system.
 
 ## Screenshot
-![<img src="docs/record-activities.png" alt="Record Activities" width="30%" />](docs/record-activities.png)
-![<img src="docs/update-profile.png" alt="Update Profile" width="30%" />](docs/update-profile.png)
-![<img src="docs/covid19-information.png" alt="Covid-19 Information" width="30%" />](docs/covid19-information.png)
+[<img src="docs/record-activities.png" alt="Record Activities" width="30%" />](docs/record-activities.png)
+[<img src="docs/update-profile.png" alt="Update Profile" width="30%" />](docs/update-profile.png)
+[<img src="docs/covid19-information.png" alt="Covid-19 Information" width="30%" />](docs/covid19-information.png)
