@@ -28,9 +28,5 @@ abstract class CovidCaseDatabase: RoomDatabase() {
             }
             return INSTANCE
         }
-
-        fun destroyInstance() {
-            INSTANCE = null
-        }
     }
 }

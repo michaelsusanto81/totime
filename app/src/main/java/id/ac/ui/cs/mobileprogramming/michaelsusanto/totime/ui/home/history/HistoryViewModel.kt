@@ -1,7 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.home.history
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.UserActivity

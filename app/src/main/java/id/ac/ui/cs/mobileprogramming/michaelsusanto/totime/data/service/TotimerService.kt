@@ -12,7 +12,7 @@ class TotimerService: Service() {
     }
 
     private val REFRESH_RATE: Long = 100;
-    private val bi: Intent = Intent(TOTIMER_BR)
+    private val broadcastIntent: Intent = Intent(TOTIMER_BR)
     private val mHandler: Handler = Handler()
     private var stopped: Boolean = false;
 
@@ -45,10 +45,10 @@ class TotimerService: Service() {
         minutes = mins.toString().padStart(2, '0')
         hours = hrs.toString().padStart(2, '0')
 
-        bi.putExtra("hours", hours)
-        bi.putExtra("minutes", minutes)
-        bi.putExtra("seconds", seconds)
-        sendBroadcast(bi)
+        broadcastIntent.putExtra("hours", hours)
+        broadcastIntent.putExtra("minutes", minutes)
+        broadcastIntent.putExtra("seconds", seconds)
+        sendBroadcast(broadcastIntent)
     }
 
     override fun onCreate() {

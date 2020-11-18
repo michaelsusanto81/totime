@@ -28,9 +28,5 @@ abstract class UserDatabase: RoomDatabase() {
             }
             return INSTANCE
         }
-
-        fun destroyInstance() {
-            UserDatabase.INSTANCE = null
-        }
     }
 }

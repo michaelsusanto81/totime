@@ -6,7 +6,6 @@ import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.UserActivity
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.repository.UserActivityRepository
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.service.SessionManager
-import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.util.Constants
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.util.TimerState
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.util.ValidationResponse
 import kotlinx.coroutines.CoroutineScope

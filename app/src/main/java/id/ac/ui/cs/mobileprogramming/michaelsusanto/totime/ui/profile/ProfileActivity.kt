@@ -151,6 +151,7 @@ class ProfileActivity : AppCompatActivity() {
         val name = binding.nameEdit.text.toString()
         val email = binding.emailEdit.text.toString()
         val user = viewModel.liveData.value
+
         val response = viewModel.validateInput(name, email)
         if (response.isError) {
             val toast = Toast.makeText(this, response.message, Toast.LENGTH_LONG)

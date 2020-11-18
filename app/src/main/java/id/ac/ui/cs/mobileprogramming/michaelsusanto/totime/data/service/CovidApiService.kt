@@ -20,7 +20,7 @@ class CovidApiService: Service() {
         const val COVID_BR: String = "id.ac.ui.cs.mobileprogramming.michaelsusanto.totimer.covid"
     }
 
-    private val bi: Intent = Intent(COVID_BR)
+    private val broadcastIntent: Intent = Intent(COVID_BR)
     private lateinit var api: CovidCaseApi
 
     private val job = Job()
@@ -43,10 +43,10 @@ class CovidApiService: Service() {
 
     private fun returnData(covidCase: CovidCase?, errorMsg: String) {
         if(covidCase != null) {
-            bi.putExtra("covidCase", covidCase)
+            broadcastIntent.putExtra("covidCase", covidCase)
         }
-        bi.putExtra("errorMsg", errorMsg)
-        sendBroadcast(bi)
+        broadcastIntent.putExtra("errorMsg", errorMsg)
+        sendBroadcast(broadcastIntent)
         stopSelf()
     }
 
