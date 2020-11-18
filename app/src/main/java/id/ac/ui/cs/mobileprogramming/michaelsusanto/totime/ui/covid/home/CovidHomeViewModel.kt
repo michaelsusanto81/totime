@@ -1,20 +1,20 @@
 package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.covid.home
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.CovidCase
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.repository.CovidCaseRepository
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.service.CovidApiService
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.service.SessionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.io.IOException
-import retrofit2.HttpException
 import java.util.*
-import kotlin.collections.ArrayList
 
 class CovidHomeViewModel(private val context: Context) : ViewModel() {
 
@@ -22,6 +22,12 @@ class CovidHomeViewModel(private val context: Context) : ViewModel() {
     private val repository: CovidCaseRepository = CovidCaseRepository(context)
     val covidCase = MutableLiveData<CovidCase>()
     val error = MutableLiveData<String>()
+
+    private val br: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            unwrapData(intent)
+        }
+    }
 
     private val job = Job()
     private val coroutineScope = CoroutineScope(job + Dispatchers.Main)
@@ -33,6 +39,24 @@ class CovidHomeViewModel(private val context: Context) : ViewModel() {
         }
     }
 
+    private fun unwrapData(intent: Intent?) {
+        if(intent?.extras != null) {
+            val covidCase = intent.getParcelableExtra<CovidCase>("covidCase")
+            val errorMsg = intent.getStringExtra("errorMsg")
+
+            if(covidCase != null) {
+                this.covidCase.value = covidCase
+                setCache(covidCase)
+            }
+
+            if(errorMsg != null && errorMsg != "") {
+                error.value = errorMsg
+                getFromCache()
+            }
+        }
+        context.unregisterReceiver(br)
+    }
+
     private fun getDate(): String {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -42,22 +66,8 @@ class CovidHomeViewModel(private val context: Context) : ViewModel() {
     }
 
     fun updateData() {
-        coroutineScope.launch {
-            try {
-                val data = repository.getCovidCase() as ArrayList
-                covidCase.value = data[0]
-                setCache(data[0])
-            } catch (e: IOException) {
-                error.value = context.getString(R.string.check_internet)
-                getFromCache()
-            } catch (e: HttpException) {
-                error.value = e.message()
-                getFromCache()
-            } catch (e: Exception) {
-                error.value = context.getString(R.string.unknown_error)
-                getFromCache()
-            }
-        }
+        context.registerReceiver(br, IntentFilter(CovidApiService.COVID_BR))
+        repository.getCovidCase()
     }
 
     private fun getFromCache() {

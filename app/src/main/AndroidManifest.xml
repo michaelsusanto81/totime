@@ -29,6 +29,7 @@
         <activity android:name=".MainActivity" />
 
         <service android:name=".data.service.TotimerService" />
+        <service android:name=".data.service.CovidApiService" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

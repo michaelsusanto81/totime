@@ -1,15 +1,14 @@
 package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.repository
 
 import android.content.Context
-import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.api.ApiFactory
-import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.api.CovidCaseApi
+import android.content.Intent
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.dao.CovidCaseDao
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.database.CovidCaseDatabase
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.CovidCase
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.service.CovidApiService
 
-class CovidCaseRepository(context: Context) {
+class CovidCaseRepository(private val context: Context) {
 
-    private lateinit var api: CovidCaseApi
     private lateinit var dao: CovidCaseDao
     private val db: CovidCaseDatabase? = CovidCaseDatabase.getInstance(context)
 
@@ -17,7 +16,6 @@ class CovidCaseRepository(context: Context) {
         if (db != null) {
             dao = db.covidCaseDao()
         }
-        api = ApiFactory.getCovidCaseApi(context)
     }
 
     suspend fun getSavedCovidCases(): List<CovidCase> {
@@ -28,8 +26,8 @@ class CovidCaseRepository(context: Context) {
         dao.addCovidCase(covidCase)
     }
 
-    suspend fun getCovidCase(): List<CovidCase> {
-        return api.getCovidCase()
+    fun getCovidCase() {
+        context.startService(Intent(context, CovidApiService::class.java))
     }
 
     suspend fun removeSavedCovidCase(covidCase: CovidCase) {
