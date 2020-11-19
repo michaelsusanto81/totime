@@ -57,10 +57,13 @@ class CovidHomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             binding.btnSave.visibility = View.VISIBLE
         })
         viewModel.error.observe(viewLifecycleOwner, Observer {
-            val toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
-            toast.show()
-            binding.swipeRefresh.isRefreshing = false
-            binding.btnSave.visibility = View.VISIBLE
+            if(it != "") {
+                val toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+                toast.show()
+                binding.swipeRefresh.isRefreshing = false
+                binding.btnSave.visibility = View.VISIBLE
+                viewModel.error.value = ""
+            }
         })
     }
 

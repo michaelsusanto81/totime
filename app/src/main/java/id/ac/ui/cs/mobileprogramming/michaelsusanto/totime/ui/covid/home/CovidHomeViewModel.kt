@@ -66,6 +66,7 @@ class CovidHomeViewModel(private val context: Context) : ViewModel() {
     }
 
     fun updateData() {
+        error.value = ""
         context.registerReceiver(br, IntentFilter(CovidApiService.COVID_BR))
         repository.getCovidCase()
     }
