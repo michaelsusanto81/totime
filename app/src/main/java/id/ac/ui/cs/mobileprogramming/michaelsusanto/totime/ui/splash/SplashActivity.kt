@@ -10,6 +10,7 @@ import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.MainActivity
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.User
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.ActivitySplashBinding
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.util.StringUtil
 
 class SplashActivity : AppCompatActivity() {
 
@@ -22,6 +23,8 @@ class SplashActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
         viewModelFactory = SplashViewModelFactory(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SplashViewModel::class.java)
+        System.loadLibrary("native-string-util")
+
         checkUser()
         binding.btnStart.setOnClickListener { start() }
     }
@@ -35,7 +38,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun start() {
-        val name = binding.nameEdit.text.toString()
+        val name = StringUtil.capitalize(binding.nameEdit.text.toString())
         val email = binding.emailEdit.text.toString()
         val response = viewModel.validateInput(name, email)
         if(response.isError) {

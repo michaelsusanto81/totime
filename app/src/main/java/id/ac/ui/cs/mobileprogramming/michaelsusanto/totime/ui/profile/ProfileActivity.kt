@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.User
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.ActivityProfileBinding
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.util.StringUtil
 import kotlinx.io.IOException
 import java.io.File
 import java.text.SimpleDateFormat
@@ -66,6 +67,7 @@ class ProfileActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile)
         viewModelFactory = ProfileViewModelFactory(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
+        System.loadLibrary("native-string-util")
 
         setupToolbar()
 
@@ -148,7 +150,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun save() {
-        val name = binding.nameEdit.text.toString()
+        val name = StringUtil.capitalize(binding.nameEdit.text.toString())
         val email = binding.emailEdit.text.toString()
         val user = viewModel.liveData.value
 
