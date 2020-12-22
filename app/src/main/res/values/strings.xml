@@ -35,4 +35,7 @@
     <string name="name_less_50">Name should at most 50 characters.</string>
     <string name="email_less_70">Email should at most 70 characters.</string>
     <string name="email_not_valid">Email address is not valid.</string>
+    <string name="perm_denied">Permission Denied</string>
+    <string name="perm_denied_desc">This app need storage permissions so you can take or edit your profile picture.\n\nAfter enabling, press back and try access profile again.</string>
+    <string name="enable_manually">Enable</string>
 </resources>
