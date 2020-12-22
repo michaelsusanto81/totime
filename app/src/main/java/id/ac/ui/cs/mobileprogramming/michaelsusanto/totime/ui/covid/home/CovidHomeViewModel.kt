@@ -4,8 +4,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.model.CovidCase
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.repository.CovidCaseRepository
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.data.service.CovidApiService
@@ -66,9 +69,20 @@ class CovidHomeViewModel(private val context: Context) : ViewModel() {
     }
 
     fun updateData() {
+        if(!isOnline()) {
+            error.value = context.resources.getString(R.string.check_internet)
+            getFromCache()
+            return
+        }
         error.value = ""
         context.registerReceiver(br, IntentFilter(CovidApiService.COVID_BR))
         repository.getCovidCase()
+    }
+
+    private fun isOnline(): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        return activeNetwork?.isConnectedOrConnecting == true
     }
 
     private fun getFromCache() {

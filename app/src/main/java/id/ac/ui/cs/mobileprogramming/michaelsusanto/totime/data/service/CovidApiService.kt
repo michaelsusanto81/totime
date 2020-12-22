@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.io.IOException
 import retrofit2.HttpException
 
 class CovidApiService: Service() {
@@ -31,8 +30,6 @@ class CovidApiService: Service() {
             try {
                 val data = api.getCovidCase() as ArrayList
                 returnData(data[0], "")
-            } catch (e: IOException) {
-                returnData(null, resources.getString(R.string.check_internet))
             } catch (e: HttpException) {
                 returnData(null, e.message())
             } catch (e: Exception) {
