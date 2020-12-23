@@ -38,4 +38,6 @@
     <string name="perm_denied">Permission Denied</string>
     <string name="perm_denied_desc">This app need storage permissions so you can take or edit your profile picture.\n\nAfter enabling, press back and try access profile again.</string>
     <string name="enable_manually">Enable</string>
+    <string name="about">About</string>
+    <string name="about_desc">An application to help you record and manage your activities, as well as get up-to-date covid cases in Indonesia.</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.ActivityMainBinding
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.about.AboutActivity
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.covid.CovidActivity
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.permdenied.PermDeniedActivity
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.profile.ProfileActivity
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_profile -> goToProfileActivity()
             R.id.action_covid -> goToCovidActivity()
+            R.id.action_about -> goToAboutActivity()
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -68,6 +70,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun goToCovidActivity(): Boolean {
         val intent = Intent(this, CovidActivity::class.java)
+        startActivity(intent)
+        return true
+    }
+
+    private fun goToAboutActivity(): Boolean {
+        val intent = Intent(this, AboutActivity::class.java)
         startActivity(intent)
         return true
     }
