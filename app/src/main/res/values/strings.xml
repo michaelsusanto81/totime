@@ -40,4 +40,5 @@
     <string name="enable_manually">Enable</string>
     <string name="about">About</string>
     <string name="about_desc">An application to help you record and manage your activities, as well as get up-to-date covid cases in Indonesia.</string>
+    <string name="creator">- Michael Susanto -</string>
 </resources>

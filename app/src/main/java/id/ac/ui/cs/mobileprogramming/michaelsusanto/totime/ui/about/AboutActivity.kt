@@ -1,20 +1,34 @@
 package id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.about
 
+import android.opengl.GLSurfaceView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.R
 import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.databinding.ActivityAboutBinding
+import id.ac.ui.cs.mobileprogramming.michaelsusanto.totime.ui.about.openGL.TotimerGLSurfaceView
 
 class AboutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAboutBinding
+    private lateinit var gLView: GLSurfaceView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        gLView = TotimerGLSurfaceView(this)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_about)
         setupToolbar()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.glView.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.glView.onResume()
     }
 
     private fun setupToolbar() {

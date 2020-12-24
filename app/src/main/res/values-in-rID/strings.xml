@@ -35,4 +35,5 @@
     <string name="enable_manually">Izinkan</string>
     <string name="about">Tentang</string>
     <string name="about_desc">Aplikasi ini membantu Anda merekam dan mengatur aktivitas. Selain itu, Anda juga dapat melihat informasi kasus COVID-19 terkini di Indonesia.</string>
+    <string name="creator">- Michael Susanto -</string>
 </resources>
